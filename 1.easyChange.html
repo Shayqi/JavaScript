@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>調整盤</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        h1{
+            font-weight:bold;
+            margin:30px 5px 30px 50px;
+        }
+        h1 button{
+            background-color: orangered;
+            width: 100px;
+            height: 40px;
+            outline:none;
+            color:white;
+            cursor:pointer;
+        }
+        #box{
+            margin-left:50px;
+            width: 100px;
+            height: 100px;
+            border: 5px solid #000;
+            background-color: white;
+        }
+        #control{
+            width: 300px;
+            height: 180px;
+            border: 20px solid #ccc;
+            display:none;
+            background-color: white;
+            position: absolute;
+            top:250px;
+            left:500px;
+        }
+        #control ul{
+            width: 300px;
+            height: 180px;
+            padding:10px 0 0 30px;
+        }
+        #control ul li{
+            list-style: none;
+            height: 40px;
+            font:bold 16px/40px '微軟正黑體';
+            position: relative;
+        }
+        #control ul li span{
+            display: inline-block;
+            font-weight:normal;
+            width: 30px;
+            height: 30px;
+            color:#777;
+            opacity:0.7;
+            background-color:#f1f1f1;
+            border: 1px solid #999;
+            font-size:14px;
+            text-align: center;
+            line-height: 30px;
+            cursor:pointer;
+        }
+        #control ul li span:hover{
+            opacity:1;
+            background-color: #ef9400;
+        }
+        #control ul li #red:hover{
+            background-color: red;
+            color:rgba(255,255,255,1);
+        }
+        #control ul li #yellow:hover{
+            background-color: #ffff00;
+            color:rgba(255,255,255,1);
+        }
+        #control ul li #blue:hover{
+            background-color: blue;
+            color:rgba(255,255,255,1);
+        }
+        #control #red{
+            background: #9cce00;
+            color:rgba(250,250,250,0.7);
+        }
+        #control #yellow{
+            background: #efbd00;
+            color:rgba(250,250,250,0.7);
+        }
+        #control #blue{
+            background: #5a94ef;
+            color:rgba(250,250,250,0.7);
+        }
+        #control ul li:nth-child(4){
+            margin:5px 0 0 50px;
+        }
+        #control ul li button{
+            width: 60px;
+            height: 30px;
+            background: #002450;
+            color:white;
+            outline:none;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>請為下面的DIV設置樣式: <button id="btn">點擊設置</button></h1>
+<div id="box"></div>
+<div id="control">
+    <ul>
+        <li>請選擇背景色:
+            <span id="red">紅</span>
+            <span id="yellow">黃</span>
+            <span id="blue">藍</span>
+        </li>
+        <li>請選擇寬(px) :
+            <span id="w200">200</span>
+            <span id="w300">300</span>
+            <span id="w400">400</span>
+        </li>
+        <li>請選擇高(px) :
+            <span id="h200">200</span>
+            <span id="h300">300</span>
+            <span id="h400">400</span>
+        </li>
+        <li>
+            <button id="re">恢復</button>
+            <button id="enter">確定</button>
+        </li>
+    </ul>
+</div>
+<script>
+    var obtn=document.getElementById('btn');
+    var obox=document.getElementById('box');
+    var oControl=document.getElementById('control');
+    var ored=document.getElementById('red');
+    var oyellow=document.getElementById('yellow');
+    var oblue=document.getElementById('blue');
+    var ow200=document.getElementById('w200');
+    var ow300=document.getElementById('w300');
+    var ow400=document.getElementById('w400');
+    var oh200=document.getElementById('h200');
+    var oh300=document.getElementById('h300');
+    var oh400=document.getElementById('h400');
+    var ore=document.getElementById('re');
+    var oenter=document.getElementById('enter');
+
+    obtn.onclick=function(){
+        oControl.style.display='block';
+        document.body.style.background='#a1a1a1';
+        obtn.style.opacity=0.5;
+        obtn.style.borderWidth='0';
+        obtn.style.cursor='default';
+    };
+    ored.onclick=function(){obox.style.background='red';};
+    oyellow.onclick=function(){obox.style.background='yellow';};
+    oblue.onclick=function(){obox.style.background='blue';};
+    ow200.onclick=function(){obox.style.width='200px';};
+    ow300.onclick=function(){obox.style.width='300px';};
+    ow400.onclick=function(){obox.style.width='400px';};
+    oh200.onclick=function(){obox.style.height='200px';};
+    oh300.onclick=function(){obox.style.height='300px';};
+    oh400.onclick=function(){obox.style.height='400px';};
+    ore.onclick=function(){
+        obox.style.width='100px';
+        obox.style.height='100px';
+        obox.style.background='#fff';
+    };
+    oenter.onclick=function(){
+        oControl.style.display='none';
+        document.body.style.background='#fff';
+        obtn.style.opacity='1';
+        obtn.style.borderWidth='2px';
+        obtn.style.cursor='pointer';
+    }
+</script>
+</body>
+</html>
