@@ -146,7 +146,7 @@
     if(y+dy<ballRadius){
       dy=-dy;
       color=change();
-    }else if(y+dy>canvas.height-ballRadius+5){
+    }else if(y+dy>canvas.height-ballRadius-3){
       if(x+ballRadius>paddleX&&x-ballRadius<paddleX+paddleWidth){
         //if(dx>0){dx+1}else{dx-1}
         if(dy>0){dy=-(dy+0.2)}else{dy=-(dy-0.2)}
