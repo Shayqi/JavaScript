@@ -1,18 +1,20 @@
 (function(){
-  let chess=document.getElementById('chess'),
-    context=chess.getContext('2d'),
-    me=true,chessBoard=[],
-    wins=[],count=0,over=false, //贏法數組
-    myWin=[],pcWin=[];
+  let chess,
+    context,
+    me,chessBoard=[],
+    wins,count,over, //贏法數組
+    myWin,pcWin,
+    w=document.getElementById('w'),wc=0,lc=0,
+    l=document.getElementById('l');
   function initialization(){
-    for(let i=0;i<count;i++){
-      myWin[i]=0;
-      pcWin[i]=0;
-    }
-  }
-  
-  function drawChessBoard(){
+    let reset=document.getElementById('box');
+    reset.innerHTML='<canvas width="450px" height="450px" id="chess"></canvas>';
+    chess=document.getElementById('chess');
+    context=chess.getContext('2d');
     context.strokeStyle='#bfbfbf';
+    me=true;chessBoard=[];
+    wins=[];count=0;over=false; //贏法數組
+    myWin=[];pcWin=[];
     for(let i=0;i<15;i++){
       context.moveTo(15+i*30,15);
       context.lineTo(15+i*30,435);
@@ -21,9 +23,6 @@
       context.lineTo(435,15+i*30);
       context.stroke();
     }
-  }
-  drawChessBoard();
-  function chessRuleA(){
     for(let i=0;i<15;i++){
       chessBoard[i]=[];
       wins[i]=[];
@@ -32,9 +31,6 @@
         wins[i][j]=[];
       }
     }
-  }
-  chessRuleA();
-  function winsRuleA(){
     //直線贏法
     for(let i=0;i<15;i++){
       for(let j=0;j<11;j++){
@@ -63,9 +59,13 @@
         count++;
       }
     }
+    for(let i=0;i<count;i++){
+      myWin[i]=0;
+      pcWin[i]=0;
+    }
+    chess.onclick=myClick;
   }
-  winsRuleA();
-  initialization();
+  
   
   function oneStep(i,j,me){
     context.beginPath();
@@ -83,10 +83,13 @@
     context.fillStyle=gradient;
     context.fill();
   }
-  
-  chess.onclick=function(e){
+  initialization();
+  function myClick(e){
     if(over){
-      return;
+      if(confirm('重新開始嗎?')){
+        initialization();
+        return;
+      }else return;
     }
     if(!me){
       return;
@@ -103,17 +106,19 @@
           myWin[k]++;
           pcWin[k]=6;
           if(myWin[k]==5){
-            alert('You win!!');
+            alert('恭喜，你贏了!!\n再點擊一下可重新開始');
             over=true;
+            wc++;
+            w.innerHTML=wc;
           }
         }
       }
       if(!over){
         me = !me;
-        computerAI();
+        setTimeout(computerAI,Math.random()*1500+300);
       }
     }
-  };
+  }
   function computerAI(){
     let myScore=[],
       pcScore=[],
@@ -171,8 +176,10 @@
         pcWin[k]++;
         myWin[k]=6;
         if(pcWin[k]==5){
-          alert('Computer win!!');
+          alert('遺憾，AI勝利了...\n再點擊一下可重新開始');
           over=true;
+          lc++;
+          l.innerHTML=lc;
         }
       }
     }
