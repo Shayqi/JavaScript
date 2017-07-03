@@ -140,14 +140,14 @@
               else if(myWin[k]==2) myScore[i][j]+=400;
               else if(myWin[k]==3){
                 if(pcWin[k]!=0) myScore[i][j]+=1800;
-                else myScore[i][j] +=3500;
+                else myScore[i][j] +=4500;
               }
               else if(myWin[k]==4) myScore[i][j]+=10000;
               if(pcWin[k]==1) pcScore[i][j]+=420;
               else if(pcWin[k]==2) pcScore[i][j]+=640;
               else if(pcWin[k]==3){
                 if(myWin[k]!=0) pcScore[i][j]+=2000;
-                else pcScore[i][j] +=4500;
+                else pcScore[i][j] +=3500;
               }
               else if(pcWin[k]==4) pcScore[i][j]+=20000;
             }
