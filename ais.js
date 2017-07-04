@@ -136,20 +136,30 @@
         if(chessBoard[i][j]==0){
           for(let k=0;k<count;k++){
             if(wins[i][j][k]){
-              if(myWin[k]==1) myScore[i][j]+=100;
-              else if(myWin[k]==2) myScore[i][j]+=200;
-              else if(myWin[k]==3){
-                if(pcWin[k]!=0) myScore[i][j]+=1500;
-                else myScore[i][j] +=4000;
+              if(myWin[k]===1) myScore[i][j]+=100;
+              else if(myWin[k]===2){
+                if(pcWin[k]!=6) myScore[i][j]+=130;
+                else myScore[i][j] +=300;
               }
-              else if(myWin[k]==4) myScore[i][j]+=12000;
-              if(pcWin[k]==1) pcScore[i][j]+=210;
-              else if(pcWin[k]==2) pcScore[i][j]+=420;
-              else if(pcWin[k]==3){
-                if(myWin[k]!=0) pcScore[i][j]+=2200;
-                else pcScore[i][j] +=3500;
+              else if(myWin[k]===3){
+                if(pcWin[k]!=6) myScore[i][j]+=300;
+                else myScore[i][j] +=800;
               }
-              else if(pcWin[k]==4) pcScore[i][j]+=20000;
+              else if(myWin[k]===4)myScore[i][j]+=3500;
+    
+              if(pcWin[k]===1) pcScore[i][j]+=110;
+              else if(pcWin[k]===2){
+                if(myWin[k]!=6) pcScore[i][j]+150;
+                else pcScore[i][j] +=350;
+              }
+              else if(pcWin[k]===3){
+                if(myWin[k]!=6) pcScore[i][j]+=500;
+                else pcScore[i][j] +=1000;
+              }
+              else if(pcWin[k]===4){
+                if(myWin[k]!=6) pcScore[i][j]+=2800;
+                else pcScore[i][j] +=20000;
+              }
             }
           }
           if(myScore[i][j]>max){
