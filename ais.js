@@ -15,14 +15,33 @@
     me=true;chessBoard=[];
     wins=[];count=0;over=false; //贏法數組
     myWin=[];pcWin=[];
-    for(let i=0;i<15;i++){
-      context.moveTo(15+i*30,15);
-      context.lineTo(15+i*30,435);
-      context.stroke();
-      context.moveTo(15,15+i*30);
-      context.lineTo(435,15+i*30);
-      context.stroke();
+    
+    function setMobile(){
+      let box=document.getElementById('box'),
+        w=window.innerWidth, h=window.innerHeight;
+      box.style.height=h*2+'px';
+      window.scrollTo(0,1);
+      h=window.innerHeight+2;
+      box.style.height=h+'px';
+      box.style.width=w+'px';
+      box.style.padding=0;
+      if(screen.width<=375) draw(15,15,24);
+      else if(screen.width>375 && screen.width<=768) draw(15,15,30);
+      else draw(15,15,30);
     }
+    function draw(x,y,gap){
+      //x=15,y=15,gap=30
+      for(let i=0;i<15;i++){
+        context.moveTo(x+i*gap,y);
+        context.lineTo(x+i*gap,gap*y-y);
+        context.stroke();
+        context.moveTo(x,y+i*gap);
+        context.lineTo(gap*x-x,y+i*gap);
+        context.stroke();
+      }
+    }
+    setMobile();
+    
     for(let i=0;i<15;i++){
       chessBoard[i]=[];
       wins[i]=[];
@@ -69,10 +88,18 @@
   
   function oneStep(i,j,me){
     context.beginPath();
-    context.arc(15+i*30,15+j*30,13,0,2*Math.PI);
+    if(screen.width<=375){
+      context.arc(15+i*24,15+j*24,10,0,2*Math.PI);
+    }else context.arc(15+i*30,15+j*30,13,0,2*Math.PI);
     context.closePath();
-    let gradient=context.createRadialGradient(15+i*30+2,15+j*30-2,13,
-      15+i*30+2,15+j*30-2,0);
+    let gradient;
+    if(screen.width<=375){
+      gradient=context.createRadialGradient(15+i*24+2,15+j*24-2,10,
+        15+i*24+2,15+j*24-2,0);
+    }else{
+      gradient=context.createRadialGradient(15+i*30+2,15+j*30-2,13,
+        15+i*30+2,15+j*30-2,0);
+    }
     if(me){
       gradient.addColorStop(0,'#0a0a0a');
       gradient.addColorStop(1,'#636766');
@@ -95,9 +122,15 @@
       return;
     }
     let x=e.offsetX,
-      y=e.offsetY;
-    let i=Math.floor(x/30),
+      y=e.offsetY,
+    i, j;
+    if(screen.width<=375){
+      i=Math.floor(x/24);
+      j=Math.floor(y/24);
+    }else{
+      i=Math.floor(x/30);
       j=Math.floor(y/30);
+    }
     if(chessBoard[i][j]==0){
       oneStep(i,j,me);
       chessBoard[i][j]=1;
